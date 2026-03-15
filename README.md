@@ -88,7 +88,7 @@ Make sure you have the following installed:
 # 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/UMP-Career-Guide.git
+git clone https://github.com/saxs-14/UMP-Career-Guide.git
 cd UMP-Career-Guide
 ```
 
