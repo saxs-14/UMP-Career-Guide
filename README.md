@@ -263,6 +263,19 @@ External contributor guidelines will be added later.
 
 ---
 
+## 📁 Phase Documentation
+
+Progress is documented step by step. See each phase for details:
+
+- [Phase 1: Foundation & Design](./docs/PHASE1.md) – ✅ Completed
+- [Phase 2: Backend & Database](./docs/PHASE2.md) – ⏳ Upcoming
+- [Phase 3: Frontend Development](./docs/PHASE3.md) – ⏳ Upcoming
+- [Phase 4: Integration & Testing](./docs/PHASE4.md) – ⏳ Upcoming
+- [Phase 5: Deployment](./docs/PHASE5.md) – ⏳ Upcoming
+- [Phase 6: Future Enhancements](./docs/PHASE6.md) – ⏳ Upcoming
+
+---
+
 # 📄 License
 
 This project is currently for **educational and demonstration purposes**.
