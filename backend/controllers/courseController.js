@@ -1,3 +1,65 @@
+// backend/controllers/courseController.js
+
+const courseModel = require('../models/courseModel');
+const { findQualifyingCourses } = require('../utils/courseMatcher');
+
+// GET /api/faculties
+exports.getFaculties = async (req, res) => {
+  try {
+    const faculties = await courseModel.getFaculties();
+    res.json(faculties);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// GET /api/courses
+exports.getCourses = async (req, res) => {
+  try {
+    const { facultyId } = req.query;
+    const courses = await courseModel.getCourses(facultyId ? parseInt(facultyId) : null);
+    res.json(courses);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// GET /api/courses/:id
+exports.getCourseById = async (req, res) => {
+  try {
+    const course = await courseModel.getCourseDetails(parseInt(req.params.id));
+    if (!course) return res.status(404).json({ error: 'Course not found' });
+    res.json(course);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// GET /api/subjects
+exports.getSubjects = async (req, res) => {
+  try {
+    const subjects = await courseModel.getSubjects();
+    res.json(subjects);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// GET /api/subject-categories
+exports.getSubjectCategories = async (req, res) => {
+  try {
+    const categories = await courseModel.getSubjectCategories();
+    res.json(categories);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 // POST /api/calculate
 exports.calculate = async (req, res) => {
   try {

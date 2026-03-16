@@ -1,0 +1,13 @@
+.dashboard {
+  display: flex;
+}
+
+.sidebarPlaceholder {
+  /* Sidebar is now part of Layout, so this can be removed */
+}
+
+.main {
+  flex: 1;
+}
+
+/* Add any page-specific styles if needed */

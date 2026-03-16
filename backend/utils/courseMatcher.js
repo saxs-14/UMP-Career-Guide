@@ -3,7 +3,7 @@
 const pool = require('../config/db');
 const { calculateAPS, percentageToLevel } = require('./apsCalculator');
 
-// Cache for subject categories (loaded at startup)
+// Cache for subject categories (loaded lazily on first use)
 let categoryCache = null;
 
 const loadCategoryCache = async () => {
@@ -18,11 +18,18 @@ const loadCategoryCache = async () => {
   categoryCache = cache;
 };
 
-// Initialize cache when module loads
-loadCategoryCache().catch(err => console.error('Failed to load category cache:', err));
+const ensureCacheLoaded = async () => {
+  if (categoryCache === null) {
+    await loadCategoryCache();
+  }
+};
+
+const clearCategoryCache = () => {
+  categoryCache = null;
+};
 
 const subjectInCategory = (subjectId, categoryId) => {
-  if (!categoryCache) return false; // not loaded yet
+  if (!categoryCache) return false;
   const cats = categoryCache.get(subjectId);
   return cats ? cats.has(categoryId) : false;
 };
@@ -34,6 +41,9 @@ const subjectInCategory = (subjectId, categoryId) => {
  * @returns {Promise<boolean>}
  */
 const meetsSubjectRequirements = async (learnerSubjects, courseId) => {
+  // Ensure category cache is loaded before we need it
+  await ensureCacheLoaded();
+
   // Get all requirement groups for the course
   const groupsQuery = `
     SELECT rg.id, rg.min_count
@@ -108,8 +118,8 @@ const findQualifyingCourses = async (subjectsWithPct) => {
 
   // 3. Get all courses with their basic info
   const coursesQuery = `
-    SELECT c.id, c.name, c.min_aps_general,
-           s.name as school_name, f.name as faculty_name
+    SELECT c.id, c.name, c.code, c.duration_years, c.min_aps_general,
+           s.name as school_name, f.name as faculty_name, f.id as faculty_id
     FROM courses c
     JOIN schools s ON c.school_id = s.id
     JOIN faculties f ON s.faculty_id = f.id
@@ -155,4 +165,4 @@ const findQualifyingCourses = async (subjectsWithPct) => {
   return { aps, qualifying };
 };
 
-module.exports = { findQualifyingCourses };
+module.exports = { findQualifyingCourses, clearCategoryCache };

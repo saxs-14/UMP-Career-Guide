@@ -1,0 +1,16 @@
+import React from 'react';
+import styles from './Dashboard.module.css';
+
+const CourseCard = ({ course }) => {
+  return (
+    <div className={styles.courseCard}>
+      <h4>{course.name}</h4>
+      <p className={styles.faculty}>{course.faculty_name}</p>
+      <p className={styles.duration}>Duration: {course.duration_years} years</p>
+      <p className={styles.minAPS}>Min APS: {course.min_aps_general}</p>
+      <button className={styles.detailsBtn}>View Details</button>
+    </div>
+  );
+};
+
+export default CourseCard;
