@@ -1,13 +1,98 @@
-.dashboard {
+/* ── Controls row (filter + search) ──────────────── */
+.controls {
   display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
-.sidebarPlaceholder {
-  /* Sidebar is now part of Layout, so this can be removed */
-}
-
-.main {
+.searchBar {
   flex: 1;
+  position: relative;
+  min-width: 200px;
 }
 
-/* Add any page-specific styles if needed */
+.searchInput {
+  width: 100%;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.clearSearch {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 14px;
+  padding: 0;
+  line-height: 1;
+}
+
+.clearSearch:hover {
+  color: #555;
+}
+
+/* ── Result count ─────────────────────────────────── */
+.resultCount {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+}
+
+/* ── Course grid ──────────────────────────────────── */
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ── Empty state ──────────────────────────────────── */
+.noCourses {
+  text-align: center;
+  color: #888;
+  margin: 50px 0;
+  font-size: 1rem;
+}
+
+/* ── Reset button ─────────────────────────────────── */
+.newCheckBtn {
+  display: inline-block;
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.newCheckBtn:hover {
+  background: #5a6268;
+}
+
+/* ── Error banner ─────────────────────────────────── */
+.error {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}

@@ -8,6 +8,7 @@ const api = axios.create({
 
 export const getFaculties = () => api.get('/faculties');
 export const getCourses = (facultyId) => api.get('/courses', { params: { facultyId } });
+export const getCourseById = (id) => api.get(`/courses/${id}`);
 export const getSubjects = () => api.get('/subjects');
 export const getSubjectCategories = () => api.get('/subject-categories');
 export const calculateAPS = (subjects) => api.post('/calculate', { subjects });

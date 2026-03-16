@@ -6,7 +6,7 @@ const SubjectInputForm = ({ onSubmit, loading }) => {
   const [subjects, setSubjects] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState(
-    Array(8).fill({ name: '', percentage: '' })
+    Array(8).fill(null).map(() => ({ name: '', percentage: '' }))
   );
 
   useEffect(() => {
